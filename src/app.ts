@@ -8,6 +8,7 @@ import { authRoutes } from "./modules/auth/auth.routes";
 import { commentRoutes } from "./modules/comment/comment.route";
 import { postRoutes } from "./modules/post/post.route";
 import { userRoutes } from "./modules/user/user.route";
+import { likeRoutes } from "./modules/like/like.route";
 
 const app: Application = express();
 
@@ -30,6 +31,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/likes", likeRoutes);
 
 app.use(notFound);
 
