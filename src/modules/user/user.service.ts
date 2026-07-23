@@ -62,7 +62,7 @@ const getMyProfileFromDB = async (userId: string) => {
 };
 
 const updateMyProfileInDB = async (userId: string, payload: any) => {
-  const { name, email, profilePhoto, bio } = payload;
+  const { name, email, profilePhoto, bio, fcmToken } = payload;
 
   const updatedUser = await prisma.user.update({
     where: { id: userId },
@@ -70,6 +70,7 @@ const updateMyProfileInDB = async (userId: string, payload: any) => {
     data: {
       name,
       email,
+      fcmToken,
       profile: {
         update: {
           profilePhoto,
@@ -90,8 +91,31 @@ const updateMyProfileInDB = async (userId: string, payload: any) => {
   return updatedUser;
 };
 
+const updateMyProfileFcmTokenInDB = async (userId: string, payload: any) => {
+  const { fcmToken } = payload;
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+
+    data: {
+      fcmToken,
+    },
+
+    omit: {
+      password: true,
+    },
+
+    include: {
+      profile: true,
+    },
+  });
+
+  return updatedUser;
+};
+
 export const userService = {
   registerUserIntoDB,
   getMyProfileFromDB,
   updateMyProfileInDB,
+  updateMyProfileFcmTokenInDB,
 };

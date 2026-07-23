@@ -1,26 +1,36 @@
 import { prisma } from "../../lib/prisma";
+import { notificationService } from "../notification/notification.service";
 import {
   ICreateCommentPayload,
-  IModerateCommentPayload,
   IUpdateCommentPayload,
 } from "./comment.interface";
 
 const createComment = async (
-  authorId: string,
+  postId: string,
   payload: ICreateCommentPayload,
 ) => {
+  const { actor, ...rest } = payload;
   await prisma.post.findUniqueOrThrow({
     where: {
-      id: payload.postId,
+      id: postId,
     },
   });
 
   const comment = await prisma.comment.create({
     data: {
-      ...payload,
-      authorId,
+      ...rest,
+      postId,
     },
   });
+
+  notificationService
+    .sendPostNotification({
+      postId,
+      actorId: actor.actorId,
+      actorName: actor.actorName,
+      notificationActionType: "COMMENT",
+    })
+    .catch((err) => console.error("Notification error:", err));
 
   return comment;
 };
@@ -101,7 +111,6 @@ const deleteComment = async (commentId: string, authorId: string) => {
 
   return comment;
 };
-
 
 export const commentService = {
   createComment,

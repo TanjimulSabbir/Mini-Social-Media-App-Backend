@@ -1,6 +1,6 @@
 {
   "info": {
-   "name": "Mini Social Feed API",
+    "name": "Mini Social Feed API",
     "_postman_id": "mini-social-feed-api",
     "description": "Postman collection for Mini Social Feed Backend",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -46,7 +46,10 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -54,8 +57,13 @@
             },
             "url": {
               "raw": "{{base_url}}/auth/signup",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "signup"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
             }
           }
         },
@@ -64,7 +72,10 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -72,8 +83,13 @@
             },
             "url": {
               "raw": "{{base_url}}/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "login"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
             }
           }
         },
@@ -82,11 +98,19 @@
           "request": {
             "method": "POST",
             "header": [],
-            "body": { "mode": "raw", "raw": "" },
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
             "url": {
               "raw": "{{base_url}}/auth/refresh-token",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "refresh-token"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
             },
             "description": "Relies on the refreshToken cookie set by /auth/login. Ensure 'Send cookies automatically' is enabled in Postman."
           }
@@ -101,7 +125,10 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
@@ -109,8 +136,13 @@
             },
             "url": {
               "raw": "{{base_url}}/users/register",
-              "host": ["{{base_url}}"],
-              "path": ["users", "register"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
             }
           }
         }
@@ -124,11 +156,20 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "body": {
               "mode": "raw",
@@ -136,8 +177,12 @@
             },
             "url": {
               "raw": "{{base_url}}/posts",
-              "host": ["{{base_url}}"],
-              "path": ["posts"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts"
+              ]
             }
           }
         },
@@ -148,8 +193,12 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/posts",
-              "host": ["{{base_url}}"],
-              "path": ["posts"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts"
+              ]
             }
           }
         },
@@ -160,12 +209,23 @@
             "header": [],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "url": {
               "raw": "{{base_url}}/posts/stats",
-              "host": ["{{base_url}}"],
-              "path": ["posts", "stats"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts",
+                "stats"
+              ]
             }
           }
         },
@@ -176,12 +236,23 @@
             "header": [],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "url": {
               "raw": "{{base_url}}/posts/my-posts",
-              "host": ["{{base_url}}"],
-              "path": ["posts", "my-posts"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts",
+                "my-posts"
+              ]
             }
           }
         },
@@ -192,8 +263,13 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/posts/{{postId}}",
-              "host": ["{{base_url}}"],
-              "path": ["posts", "{{postId}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
             }
           }
         },
@@ -202,11 +278,20 @@
           "request": {
             "method": "PATCH",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "body": {
               "mode": "raw",
@@ -214,8 +299,13 @@
             },
             "url": {
               "raw": "{{base_url}}/posts/{{postId}}",
-              "host": ["{{base_url}}"],
-              "path": ["posts", "{{postId}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
             }
           }
         },
@@ -226,12 +316,23 @@
             "header": [],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "url": {
               "raw": "{{base_url}}/posts/{{postId}}",
-              "host": ["{{base_url}}"],
-              "path": ["posts", "{{postId}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
             }
           }
         }
@@ -245,20 +346,34 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"postId\": \"{{postId}}\",\n  \"content\": \"This is a comment.\"\n}"
+              "raw": "{\n  \"postId\": \"{{postId}}\",\n  \"content\": \"This is a comment.\"\n, \"actor\": { \"actorId\": \"user123\", \"actorName\": \"John Doe\" }\n}"
             },
             "url": {
-              "raw": "{{base_url}}/comments",
-              "host": ["{{base_url}}"],
-              "path": ["comments"]
+              "raw": "{{base_url}}/comments/{{postId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "comments",
+                "{{postId}}"
+              ]
             }
           }
         },
@@ -269,12 +384,23 @@
             "header": [],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
             },
             "url": {
               "raw": "{{base_url}}/comments/{{commentId}}",
-              "host": ["{{base_url}}"],
-              "path": ["comments", "{{commentId}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
             }
           }
         }
@@ -290,12 +416,27 @@
             "header": [],
             "auth": {
               "type": "bearer",
-              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"postId\": \"{{postId}}\"\n, \"actor\": { \"actorId\": \"user123\", \"actorName\": \"John Doe\" }\n}"
             },
             "url": {
               "raw": "{{base_url}}/likes/{{postId}}",
-              "host": ["{{base_url}}"],
-              "path": ["likes", "{{postId}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "likes",
+                "{{postId}}"
+              ]
             }
           }
         }
