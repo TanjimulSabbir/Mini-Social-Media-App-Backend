@@ -5,3 +5,4 @@ generated
 /generated/prisma
 # Firebase secret
 src/config/firebase-admin.json
+.vercel
