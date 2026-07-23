@@ -1,5 +1,5 @@
 import { App, getApps, initializeApp, cert } from "firebase-admin/app";
-import config from ".";
+import config from "./index";
 
 let firebaseApp: App;
 

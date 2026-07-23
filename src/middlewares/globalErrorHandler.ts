@@ -1,7 +1,7 @@
 // src/middlewares/globalErrorHandler.ts
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
-import config from "../config";
+import config from "../config/index";
 import { TGenericErrorResponse } from "../../types/app.error.response";
 import AppError from "../utils/errors/app.error";
 import { handleZodError } from "../utils/errors/zod.error";
