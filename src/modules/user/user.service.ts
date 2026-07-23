@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import config from "../../config/index";
 import { prisma } from "../../lib/prisma";
 import { RegisterUserPayload } from "./user.interface";
+import appError from "../../utils/errors/app.error";
+import httpStatus from "http-status";
 
 const registerUserIntoDB = async (payload: RegisterUserPayload) => {
   const { name, email, password, profilePhoto } = payload;
@@ -10,7 +12,11 @@ const registerUserIntoDB = async (payload: RegisterUserPayload) => {
   });
 
   if (isUserExist) {
-    throw new Error("User with this email already exists");
+    throw new appError(
+      httpStatus.BAD_REQUEST,
+      "User already exists with this email",
+      { email, description: "Please use a different email to register" },
+    );
   }
 
   const hashedPassword = await bcrypt.hash(
