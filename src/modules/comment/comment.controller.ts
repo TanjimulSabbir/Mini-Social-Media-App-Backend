@@ -3,26 +3,33 @@ import httpStatus from "http-status";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { commentService } from "./comment.service";
-import AppError from "../../utils/errors/app.error";
 
 const createComment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.params.postId) {
-      return new AppError(
-        httpStatus.BAD_REQUEST,
-        "Post ID is required in the request parameters",
-        { missingParam: "postId" },
-      );
-    }
-    const postId = req.params.postId;
-    const result = await commentService.createComment(
-      postId as string,
-      req.body,
-    );
+    const { postId, content } = req.body;
+    const user = req.user as { id: string; name: string };
+
+    const result = await commentService.createComment(postId, user, {
+      content,
+    });
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.CREATED,
       message: "Comment created successfully",
+      data: result,
+    });
+  },
+);
+
+const getCommentByPostId = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { postId } = req.params;
+    console.log("Post ID:", postId); // Debugging line to check the value of postId
+    const result = await commentService.getCommentByPostId(postId as string);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Comment retrieved successfully",
       data: result,
     });
   },
@@ -38,19 +45,6 @@ const getCommentByAuthorId = catchAsync(
       success: true,
       statusCode: httpStatus.OK,
       message: "Comments retrieved successfully",
-      data: result,
-    });
-  },
-);
-
-const getCommentByPostId = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { postId } = req.params;
-    const result = await commentService.getCommentByCommentId(postId as string);
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatus.OK,
-      message: "Comment retrieved successfully",
       data: result,
     });
   },
@@ -96,8 +90,8 @@ const deleteComment = catchAsync(
 
 export const commentController = {
   createComment,
-  getCommentByAuthorId,
   getCommentByPostId,
+  getCommentByAuthorId,
   updateComment,
   deleteComment,
 };

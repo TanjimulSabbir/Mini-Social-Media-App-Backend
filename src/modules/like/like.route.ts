@@ -6,7 +6,7 @@ import { likeController } from "./like.controller";
 const router = Router();
 
 router.post(
-  "/:postId",
+  "/",
   auth(Role.USER, Role.ADMIN, Role.AUTHOR),
   likeController.toggleLike,
 );

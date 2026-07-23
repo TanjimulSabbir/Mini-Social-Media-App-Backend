@@ -6,16 +6,10 @@ import { likeService } from "./like.service";
 
 const toggleLike = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { actorId, name } = req.body.actor;
-
-    const { postId } = req.params;
-
+    const { postId } = req.body;
     const result = await likeService.toggleLike(
-      {
-        actorId,
-        name,
-      },
       postId as string,
+      req.user as { id: string; name: string },
     );
 
     sendResponse(res, {

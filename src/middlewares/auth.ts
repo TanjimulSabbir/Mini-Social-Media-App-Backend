@@ -5,6 +5,8 @@ import config from "../config/index";
 import { prisma } from "../lib/prisma";
 import { catchAsync } from "../utils/catchAsync";
 import { jwtUtils } from "../utils/jwt";
+import AppError from "../utils/errors/app.error";
+import httpStatus from "http-status";
 
 declare global {
   namespace Express {
@@ -19,6 +21,7 @@ declare global {
   }
 }
 
+
 export const auth = (...requiredRoles: Role[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.accessToken
@@ -28,7 +31,8 @@ export const auth = (...requiredRoles: Role[]) => {
         : req.headers.authorization;
 
     if (!token) {
-      throw new Error(
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
         "You are not logged in. Please log in to access this resource.",
       );
     }
@@ -36,39 +40,38 @@ export const auth = (...requiredRoles: Role[]) => {
     const verifiedToken = jwtUtils.verifyToken(token, config.jwt_access_secret);
 
     if (!verifiedToken.success) {
-      throw new Error(verifiedToken.error);
+      throw new AppError(httpStatus.UNAUTHORIZED, verifiedToken.error);
     }
 
-    const { email, name, id, role } = verifiedToken.data as JwtPayload;
+    const { id } = verifiedToken.data as JwtPayload;
 
-    if (requiredRoles.length && !requiredRoles.includes(role)) {
-      throw new Error(
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new AppError(httpStatus.UNAUTHORIZED, "User not found. Please log in again.");
+    }
+
+    if (user.activeStatus === "BLOCKED") {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        "Your account has been blocked. Please contact support.",
+      );
+    }
+
+    if (requiredRoles.length && !requiredRoles.includes(user.role)) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
         "Forbidden. You don't have permission to access this resource.",
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: {
-        id,
-        email,
-        name,
-        role,
-      },
-    });
-
-    if (!user) {
-      throw new Error("User not found. Please log in again.");
-    }
-
-    if (user.activeStatus === "BLOCKED") {
-      throw new Error("Your account has been blocked. Please contact support.");
-    }
-
     req.user = {
-      email,
-      name,
-      id,
-      role,
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
     };
 
     next();

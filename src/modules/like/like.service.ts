@@ -2,12 +2,12 @@ import { prisma } from "../../lib/prisma";
 import { notificationService } from "../notification/notification.service";
 
 interface IActor {
-  actorId: string;
+  id: string;
   name: string;
 }
 
-const toggleLike = async (actor: IActor, postId: string) => {
-  const { actorId, name: actorName } = actor;
+const toggleLike = async (postId: string, actor: IActor) => {
+  const { id: actorId, name: actorName } = actor;
 
   // Check post exists
   await prisma.post.findUniqueOrThrow({

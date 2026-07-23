@@ -7,18 +7,17 @@ import {
 
 const createComment = async (
   postId: string,
-  payload: ICreateCommentPayload,
+  actor: { id: string; name: string },
+  payload: { content: string },
 ) => {
-  const { actor, ...rest } = payload;
   await prisma.post.findUniqueOrThrow({
-    where: {
-      id: postId,
-    },
+    where: { id: postId },
   });
 
   const comment = await prisma.comment.create({
     data: {
-      ...rest,
+      content: payload.content,
+      authorId: actor.id,
       postId,
     },
   });
@@ -26,15 +25,34 @@ const createComment = async (
   notificationService
     .sendPostNotification({
       postId,
-      actorId: actor.actorId,
-      actorName: actor.actorName,
+      actorId: actor.id,
+      actorName: actor.name,
       notificationActionType: "COMMENT",
     })
     .catch((err) => console.error("Notification error:", err));
 
   return comment;
 };
+const getCommentByPostId = async (postId: string) => {
+  const comments = await prisma.comment.findMany({
+    where: {
+      postId: postId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      author: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
 
+  return comments;
+};
 const getCommentByAuthorId = async (authorId: string) => {
   const comments = await prisma.comment.findMany({
     where: {
@@ -114,6 +132,7 @@ const deleteComment = async (commentId: string, authorId: string) => {
 
 export const commentService = {
   createComment,
+  getCommentByPostId,
   getCommentByAuthorId,
   getCommentByCommentId,
   updateComment,
