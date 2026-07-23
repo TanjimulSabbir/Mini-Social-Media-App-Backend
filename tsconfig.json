@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
+    "rootDir": ".",
     "outDir": "./dist",
-    "rootDir": "./src",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2023",
+    "module": "esnext",
+    "target": "esnext",
     "types": ["node"],
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     "noUncheckedIndexedAccess": true,
     "strict": true,
-    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
+  // "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
