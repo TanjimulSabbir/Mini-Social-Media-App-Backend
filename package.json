@@ -1,9 +1,9 @@
 {
-  "name": "prisma-press-backend",
+  "name": "Mini Social Media App",
   "version": "0.0.1",
-  "description": "",
+  "description": "A mini social media application built with Node.js and TypeScript.",
   "license": "ISC",
-  "author": "",
+  "author": "Tanjimul Islam Sabbir",
   "type": "module",
   "main": "server.ts",
   "scripts": {
