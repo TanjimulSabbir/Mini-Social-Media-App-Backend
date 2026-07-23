@@ -9,7 +9,6 @@ import { commentRoutes } from "./modules/comment/comment.route";
 import { postRoutes } from "./modules/post/post.route";
 import { userRoutes } from "./modules/user/user.route";
 import { likeRoutes } from "./modules/like/like.route";
-import { notificationRoutes } from "./modules/notification/notofication.route";
 import path from "path";
 
 const app: Application = express();
