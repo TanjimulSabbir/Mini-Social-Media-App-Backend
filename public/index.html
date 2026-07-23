@@ -102,39 +102,100 @@
       <div class="status"><span class="dot"></span>Online</div>
     </header>
 
-    <div class="group">
-      <div class="group-title">Auth</div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/auth/signup</span></div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/auth/login</span></div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/auth/refresh-token</span></div>
-    </div>
+ <div class="group">
+  <div class="group-title">Auth</div>
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/auth/signup</span>
+  </div>
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/auth/login</span>
+  </div>
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/auth/refresh-token</span>
+  </div>
+</div>
 
-    <div class="group">
-      <div class="group-title">User</div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/users/register</span></div>
-    </div>
 
-    <div class="group">
-      <div class="group-title">Post</div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/posts</span><span class="auth-tag">auth required</span></div>
-      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts</span></div>
-      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts/stats</span><span class="auth-tag">admin only</span></div>
-      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts/my-posts</span><span class="auth-tag">auth required</span></div>
-      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts/:postId</span></div>
-      <div class="endpoint"><span class="method PATCH">PATCH</span><span class="path">/api/posts/:postId</span><span class="auth-tag">auth required</span></div>
-      <div class="endpoint"><span class="method DELETE">DELETE</span><span class="path">/api/posts/:postId</span><span class="auth-tag">auth required</span></div>
-    </div>
+<div class="group">
+  <div class="group-title">User</div>
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/users/register</span>
+  </div>
+</div>
 
-    <div class="group">
-      <div class="group-title">Comment</div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/comments</span><span class="auth-tag">auth required</span></div>
-      <div class="endpoint"><span class="method DELETE">DELETE</span><span class="path">/api/comments/:commentId</span><span class="auth-tag">auth required</span></div>
-    </div>
 
-    <div class="group">
-      <div class="group-title">Like</div>
-      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/likes/:postId</span><span class="auth-tag">auth required</span></div>
-    </div>
+<div class="group">
+  <div class="group-title">Post</div>
+
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/posts</span>
+    <span class="auth-tag">auth required</span>
+  </div>
+
+  <div class="endpoint">
+    <span class="method GET">GET</span>
+    <span class="path">/api/posts</span>
+  </div>
+
+
+  <div class="endpoint">
+    <span class="method GET">GET</span>
+    <span class="path">/api/posts/:postId</span>
+  </div>
+
+  <div class="endpoint">
+    <span class="method PATCH">PATCH</span>
+    <span class="path">/api/posts/:postId</span>
+    <span class="auth-tag">auth required</span>
+  </div>
+
+  <div class="endpoint">
+    <span class="method DELETE">DELETE</span>
+    <span class="path">/api/posts/:postId</span>
+    <span class="auth-tag">auth required</span>
+  </div>
+
+</div>
+
+
+<div class="group">
+  <div class="group-title">Comment</div>
+
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/comments</span>
+    <span class="auth-tag">auth required</span>
+  </div>
+
+  <div class="endpoint">
+    <span class="method GET">GET</span>
+    <span class="path">/api/comments/:postId</span>
+  </div>
+
+  <div class="endpoint">
+    <span class="method DELETE">DELETE</span>
+    <span class="path">/api/comments/:commentId</span>
+    <span class="auth-tag">auth required</span>
+  </div>
+
+</div>
+
+
+<div class="group">
+  <div class="group-title">Like</div>
+
+  <div class="endpoint">
+    <span class="method POST">POST</span>
+    <span class="path">/api/likes</span>
+    <span class="auth-tag">auth required</span>
+  </div>
+
+</div>
   </div>
 </body>
 </html>
