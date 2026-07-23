@@ -3,3 +3,5 @@ dist
 generated
 .env
 /generated/prisma
+# Firebase secret
+src/config/firebase-admin.json

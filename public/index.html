@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Social Feed API</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 48px 20px;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #14532d;
+      color: #86efac;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 12px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+    .group {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .group-title {
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+      border-bottom: 1px solid #334155;
+      background: #172033;
+    }
+    .endpoint {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 1px solid #253347;
+      font-family: "SF Mono", monospace;
+      font-size: 13px;
+    }
+    .endpoint:last-child { border-bottom: none; }
+    .method {
+      flex-shrink: 0;
+      width: 56px;
+      text-align: center;
+      padding: 3px 0;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .GET { background: #164e63; color: #67e8f9; }
+    .POST { background: #14532d; color: #86efac; }
+    .PATCH { background: #713f12; color: #fde68a; }
+    .DELETE { background: #7f1d1d; color: #fca5a5; }
+    .path { color: #e2e8f0; }
+    .auth-tag {
+      margin-left: auto;
+      font-size: 10px;
+      color: #64748b;
+      font-family: -apple-system, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Mini Social Feed API</h1>
+      <p>Base URL: <code>/api</code></p>
+      <div class="status"><span class="dot"></span>Online</div>
+    </header>
+
+    <div class="group">
+      <div class="group-title">Auth</div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/auth/signup</span></div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/auth/login</span></div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/auth/refresh-token</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">User</div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/users/register</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Post</div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/posts</span><span class="auth-tag">auth required</span></div>
+      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts</span></div>
+      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts/stats</span><span class="auth-tag">admin only</span></div>
+      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts/my-posts</span><span class="auth-tag">auth required</span></div>
+      <div class="endpoint"><span class="method GET">GET</span><span class="path">/api/posts/:postId</span></div>
+      <div class="endpoint"><span class="method PATCH">PATCH</span><span class="path">/api/posts/:postId</span><span class="auth-tag">auth required</span></div>
+      <div class="endpoint"><span class="method DELETE">DELETE</span><span class="path">/api/posts/:postId</span><span class="auth-tag">auth required</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Comment</div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/comments</span><span class="auth-tag">auth required</span></div>
+      <div class="endpoint"><span class="method DELETE">DELETE</span><span class="path">/api/comments/:commentId</span><span class="auth-tag">auth required</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Like</div>
+      <div class="endpoint"><span class="method POST">POST</span><span class="path">/api/likes/:postId</span><span class="auth-tag">auth required</span></div>
+    </div>
+  </div>
+</body>
+</html>
